@@ -7,7 +7,7 @@ kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/latest/
 
 Install Nginx Gateway Fabric Controller:
 ```bash
-helm install nginx-gateway \
+helm upgrade -i nginx-gateway \
   oci://ghcr.io/nginx/charts/nginx-gateway-fabric \
   --create-namespace \
   --namespace nginx-gateway \
