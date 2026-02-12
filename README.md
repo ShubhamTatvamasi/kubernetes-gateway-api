@@ -95,9 +95,7 @@ Start minikube tunnel for LoadBalancer service:
 minikube tunnel
 ```
 
-Access the home page
-
-http://localhost/
+Access the home page http://localhost/
 
 
 
