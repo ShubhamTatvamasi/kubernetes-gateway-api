@@ -13,6 +13,13 @@ helm install nginx-gateway-fabric \
   oci://ghcr.io/nginx/charts/nginx-gateway-fabric \
   --version 2.4.1
 ```
+> This also installs `nginx` GatewayClass
+
+Deploy nginx:
+```bash
+kubectl create deployment nginx --image=nginx:alpine
+kubectl expose deployment nginx --port=80
+```
 
 Create nginx Gateway:
 ```bash
@@ -33,13 +40,25 @@ spec:
 EOF
 ```
 
-Deploy nginx:
+Create nginx Route:
 ```bash
-kubectl create deployment nginx --image=nginx:alpine
-kubectl expose deployment nginx --port=80
+kubectl apply -f - << EOF
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: nginx-route
+spec:
+  parentRefs:
+  - name: nginx-gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: nginx
+      port: 80
+EOF
 ```
-
-
-
 
 
