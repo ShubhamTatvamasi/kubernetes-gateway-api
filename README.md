@@ -61,4 +61,43 @@ spec:
 EOF
 ```
 
+---
+
+### Minikube Setup
+
+Install metallb:
+```bash
+helm repo add metallb https://metallb.github.io/metallb
+helm repo update
+
+helm upgrade -i metallb metallb/metallb \
+  --create-namespace \
+  --namespace metallb-system
+```
+
+Create IP Pool:
+```bash
+kubectl create -f - << EOF
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  namespace: metallb-system
+  name: ip-pool
+spec:
+  addresses:
+  - $(kubectl get nodes -o jsonpath='{ $.items[*].status.addresses[?(@.type=="InternalIP")].address }')/32
+EOF
+```
+> Use `ExternalIP` for public network.
+
+Start minikube tunnel for LoadBalancer service:
+```bash
+minikube tunnel
+```
+
+Access the home page
+
+http://localhost/
+
+
 
