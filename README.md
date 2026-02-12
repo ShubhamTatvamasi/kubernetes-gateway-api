@@ -32,3 +32,14 @@ spec:
         from: All
 EOF
 ```
+
+Deploy nginx:
+```bash
+kubectl create deployment nginx --image=nginx:alpine
+kubectl expose deployment nginx --port=80
+```
+
+
+
+
+
