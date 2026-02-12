@@ -9,7 +9,7 @@ Install Nginx Gateway Fabric Controller:
 ```bash
 helm install nginx-gateway-fabric \
   --create-namespace \
-  --namespace nginx-gateway-fabric \
+  --namespace nginx-gateway \
   oci://ghcr.io/nginx/charts/nginx-gateway-fabric \
   --version 2.4.1
 ```
