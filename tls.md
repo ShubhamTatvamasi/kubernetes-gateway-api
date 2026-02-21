@@ -29,7 +29,7 @@ kind: Gateway
 metadata:
   name: nginx-gateway
   annotations:
-    cert-manager.io/issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   gatewayClassName: nginx
   listeners:
