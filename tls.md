@@ -55,6 +55,7 @@ EOF
 
 Create Route:
 ```yaml
+kubectl apply -f - << EOF
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
