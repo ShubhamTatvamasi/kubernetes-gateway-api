@@ -55,25 +55,22 @@ EOF
 
 Create Route:
 ```yaml
-kubectl apply -f - << EOF
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: nginx-route
+  name: http-route
 spec:
   parentRefs:
   - name: nginx-gateway
-    sectionName: https
+    sectionName: http
   hostnames:
   - rke2.shubhamtatvamasi.com
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /
-    backendRefs:
-    - name: nginx
-      port: 80
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        statusCode: 301
 EOF
 ```
 
