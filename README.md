@@ -5,6 +5,11 @@ Install Gateway API CRDs:
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/latest/download/standard-install.yaml
 ```
 
+Verify that `gateway.networking.k8s.io/v1` has been installed on cluster:
+```bash
+kubectl api-resources | grep gateway
+```
+
 Install Nginx Gateway Fabric Controller:
 ```bash
 helm upgrade -i nginx-gateway \
