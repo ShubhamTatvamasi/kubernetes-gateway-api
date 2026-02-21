@@ -52,4 +52,20 @@ spec:
 EOF
 ```
 
+```yaml
+kubectl apply -f - << EOF
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: rke2-shubhamtatvamasi-com
+spec:
+  secretName: rke2-shubhamtatvamasi-com-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - rke2.shubhamtatvamasi.com
+EOF
+```
+
 
