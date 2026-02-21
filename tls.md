@@ -53,20 +53,26 @@ spec:
 EOF
 ```
 
+Create Route:
 ```yaml
-kubectl apply -f - << EOF
-apiVersion: cert-manager.io/v1
-kind: Certificate
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
-  name: rke2-shubhamtatvamasi-com
+  name: nginx-route
 spec:
-  secretName: rke2-shubhamtatvamasi-com-tls
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-  dnsNames:
+  parentRefs:
+  - name: nginx-gateway
+    sectionName: https
+  hostnames:
   - rke2.shubhamtatvamasi.com
-EOF
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: nginx
+      port: 80
 ```
 
 
