@@ -9,7 +9,6 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    email: your@email.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-prod-key
@@ -29,6 +28,8 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: nginx-gateway
+  annotations:
+    cert-manager.io/issuer: letsencrypt-prod
 spec:
   gatewayClassName: nginx
   listeners:
