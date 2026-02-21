@@ -53,13 +53,13 @@ spec:
 EOF
 ```
 
-Create Route:
+Create HTTP Redirect Route:
 ```yaml
 kubectl apply -f - << EOF
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: http-route
+  name: http-redirect
 spec:
   parentRefs:
   - name: nginx-gateway
@@ -72,6 +72,30 @@ spec:
       requestRedirect:
         scheme: https
         statusCode: 301
+EOF
+```
+
+Create HTTP Backend Route:
+```yaml
+kubectl apply -f - << EOF
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: https-backend
+spec:
+  parentRefs:
+  - name: nginx-gateway
+    sectionName: https
+  hostnames:
+  - rke2.shubhamtatvamasi.com
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: nginx
+      port: 80
 EOF
 ```
 
