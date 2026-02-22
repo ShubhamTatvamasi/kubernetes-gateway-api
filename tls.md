@@ -64,7 +64,7 @@ spec:
 EOF
 ```
 
-Create HTTP Redirect Route:
+Create **HTTP** Redirect Route:
 ```yaml
 kubectl apply -f - << EOF
 apiVersion: gateway.networking.k8s.io/v1
@@ -86,7 +86,7 @@ spec:
 EOF
 ```
 
-Create HTTP Backend Route:
+Create **HTTPS** Backend Route:
 ```yaml
 kubectl apply -f - << EOF
 apiVersion: gateway.networking.k8s.io/v1
