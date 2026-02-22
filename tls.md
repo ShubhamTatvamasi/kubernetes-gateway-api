@@ -5,6 +5,7 @@ Install cert-manager with GatewayAPI support:
 helm upgrade -i cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --create-namespace \
   --namespace cert-manager \
+  --set crds.enabled=true \
   --set config.apiVersion="controller.config.cert-manager.io/v1alpha1" \
   --set config.kind="ControllerConfiguration" \
   --set config.enableGatewayAPI=true
